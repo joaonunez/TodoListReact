@@ -21,20 +21,21 @@ export const Home = () => {
             <input
               type="text"
               placeholder="Ingresa Una Nueva Tarea"
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(escrito) => setInputValue(escrito.target.value)}
               value={inputValue}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
+              onKeyDownCapture={(tecla) => {
+                if (tecla.key === "Enter") {
                   setTareas(tareasArray.concat(inputValue));
-                  console.log(tareasArray)
+                  
                   setInputValue("");
                 }
+                
               }}
             ></input>
           </li>
           {tareasArray.map((tarea, index) => (
             <li key={index}>
-              {tarea}{" "}
+              {tarea}
               <FontAwesomeIcon
                 icon={faTrash}
                 className="fa-trash"
