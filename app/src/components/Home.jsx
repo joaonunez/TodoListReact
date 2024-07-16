@@ -5,7 +5,7 @@ import tareas from "../scripts/tareas";
 
 export const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [tareasArray, setTareas] = useState();
+  const [tareasArray, setTareas] = useState(tareas);
 
   const borrarTarea = (index) => {
     const filtroTareas = tareasArray.filter((_, i) => i !== index);
