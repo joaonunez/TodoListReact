@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import tareas from "../scripts/tareas";
 export const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [tareasArray, setTareas] = useState(tareas);
+  const borrarTarea = (index) =>{
+    const filtroTareas = tareasArray.filter((_,i)=>i !== index)
+    setTareas(filtroTareas)
+  }
 
   return (
     <>
@@ -20,20 +24,21 @@ export const Home = () => {
               onKeyPress={(e) => {
                 console.log(e.key);
                 if (e.key === "Enter") {
-                  setTodos(todos.concat(inputValue));
+                  setTareas(tareasArray.concat(inputValue));
                   setInputValue("");
                 }
               }}
             ></input>
           </li>
-          {todos.map((t) => (
-            <li>
-              {t} <FontAwesomeIcon icon={faTrash} />
+          {tareasArray.map((tarea,index) => (
+            <li key={index}>
+              {tarea} <FontAwesomeIcon icon={faTrash} onClick={()=>borrarTarea(index)} />
             </li>
+          
           ))}
           
         </ul>
-        <div>23 Tasks</div>
+        <div>{tareasArray.length} Tareas.</div>
       </div>
     </>
   );
